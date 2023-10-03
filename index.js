@@ -4,9 +4,8 @@ const express = require("express");
 const app = express();
 
 // Handle the search request and navigate to the specified URL
-app.get("/", async (req, res) => {
-  const query = req.query.query;
-
+app.get("/", async (_req, res) => {
+ 
   // Launch Chromium
   const browser = await puppeteer.launch({ headless: 'new' });
   const page = await browser.newPage();
@@ -33,4 +32,4 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.listen();
+app.listen(3007);
