@@ -35,7 +35,13 @@ app.get("/", async (_req, res) => {
         if (element) {
           element.remove();
         }
-      }, '#KjcHPc');
+      }, "#KjcHPc");
+      await page.evaluate((selector) => {
+        const element = document.querySelector(selector);
+        if (element) {
+          element.remove();
+        }
+      }, "#xe7COe");
     }
     await page.waitForSelector(
       "#knowledge-verticals-internetspeedtest__test_button"
