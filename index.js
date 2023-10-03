@@ -30,6 +30,12 @@ app.get("/", async (_req, res) => {
 
       // The Google cookies accept modal is present; click the "I Agree" button
       await page.click(cookiesModalSelector);
+      await page.evaluate((selector) => {
+        const element = document.querySelector(selector);
+        if (element) {
+          element.remove();
+        }
+      }, '#KjcHPc');
     }
     await page.waitForSelector(
       "#knowledge-verticals-internetspeedtest__test_button"
