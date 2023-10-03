@@ -18,7 +18,11 @@ app.get("/", async (_req, res) => {
     // await page.waitForNavigation({ waitUntil: 'networkidle0' });
     const cookiesModalSelector = "#L2AGLb";
     const modalPresent = await page
-      .waitForSelector(cookiesModalSelector, { timeout: 5000 })
+      .waitForSelector(cookiesModalSelector, {
+        timeout: 5000,
+        visible: true,
+        clickable: true,
+      })
       .then(() => true)
       .catch(() => false);
     if (modalPresent) {
