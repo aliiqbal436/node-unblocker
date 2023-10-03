@@ -15,9 +15,7 @@ app.get("/", async (_req, res) => {
     const cookiesModalSelector = "#L2AGLb";
     const modalPresent = await page
       .waitForSelector(cookiesModalSelector, { timeout: 5000 })
-      .then(() => true)
-      .catch(() => false);
-
+    console.log('modalPresent ====', modalPresent);
     if (modalPresent) {
       // The Google cookies accept modal is present; click the "I Agree" button
       await page.click(cookiesModalSelector);
