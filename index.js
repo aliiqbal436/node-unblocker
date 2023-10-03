@@ -6,7 +6,11 @@ const app = express();
 // Handle the search request and navigate to the specified URL
 app.get("/", async (_req, res) => {
   // Launch Chromium
-  const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox'], headless: 'new',executablePath: '/usr/bin/chromium-browser' });
+  const browser = await puppeteer.launch({
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    headless: "new",
+    executablePath: "/usr/bin/chromium-browser",
+  });
   const page = await browser.newPage();
   try {
     // Navigate to the specified URL
@@ -17,8 +21,9 @@ app.get("/", async (_req, res) => {
       .waitForSelector(cookiesModalSelector, { timeout: 5000 })
       .then(() => true)
       .catch(() => false);
-    console.log('modalPresent ====', modalPresent);
     if (modalPresent) {
+      console.log("modalPresent ====", modalPresent);
+
       // The Google cookies accept modal is present; click the "I Agree" button
       await page.click(cookiesModalSelector);
     }
