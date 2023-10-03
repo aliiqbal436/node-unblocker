@@ -5,14 +5,23 @@ const app = express();
 
 // Handle the search request and navigate to the specified URL
 app.get("/", async (_req, res) => {
- 
   // Launch Chromium
-  const browser = await puppeteer.launch({ headless: 'new' });
+  const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox'], headless: 'new',executablePath: '/usr/bin/chromium-browser' });
   const page = await browser.newPage();
   try {
     // Navigate to the specified URL
     await page.goto(`https://www.google.com/search?q=speed+test`);
     // await page.waitForNavigation({ waitUntil: 'networkidle0' });
+    const cookiesModalSelector = "#L2AGLb";
+    const modalPresent = await page
+      .waitForSelector(cookiesModalSelector, { timeout: 5000 })
+      .then(() => true)
+      .catch(() => false);
+
+    if (modalPresent) {
+      // The Google cookies accept modal is present; click the "I Agree" button
+      await page.click(cookiesModalSelector);
+    }
     await page.waitForSelector(
       "#knowledge-verticals-internetspeedtest__test_button"
     );
@@ -20,7 +29,7 @@ app.get("/", async (_req, res) => {
     await page.waitForSelector(
       "#knowledge-verticals-internetspeedtest__upload"
     );
-    await page.waitForTimeout(30000);
+    await page.waitForTimeout(20000);
 
     const html = await page.content();
     await browser.close();
