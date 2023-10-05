@@ -22,9 +22,9 @@ const io = new Server(httpServer, {
 
 const runSpeedTest = async () => {
     const browser = await puppeteer.launch({
-    // args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    headless: false,
-    // executablePath: "/usr/bin/chromium-browser",
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    headless: 'new',
+    executablePath: "/usr/bin/chromium-browser",
   });
   const page = await browser.newPage();
   try {
