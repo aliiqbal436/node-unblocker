@@ -64,7 +64,7 @@ const runSpeedTest = async () => {
     await page.waitForSelector(
       "#knowledge-verticals-internetspeedtest__upload"
     );
-    await page.waitForTimeout(50000);
+    await page.waitForTimeout(30000);
 
     const html = await page.content();
     await browser.close();
