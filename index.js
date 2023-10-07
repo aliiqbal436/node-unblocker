@@ -7,7 +7,7 @@ const cors = require("cors");
 const app = express();
 
 const corsOptions = {
-  origin: "http://localhost:3000", // Replace with your React app's origin
+  origin: "http://144.202.14.21:3000", // Replace with your React app's origin
   methods: ["GET", "POST"], // Add other methods if needed
 };
 
@@ -16,7 +16,7 @@ app.use(cors(corsOptions));
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:3000"
+    origin: "http://144.202.14.21:3000"
   }
 });
 
